@@ -1,11 +1,16 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const bodyParser = require('body-parser');
 
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use(authRoutes);
+
+
 
 const mongoUri = "mongodb+srv://manushadananjaya999:A3amGyjkv6AqI0Cs@cluster0.dpyghhm.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUri);
@@ -24,7 +29,7 @@ app.get('/', (req, res) => {
     }
 );
 
-app.listen(5001, () => {
+app.listen(5003, () => {
     console.log('Listening on port 3002');
     }
 );
