@@ -1,7 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
+
 
 const app = express();
+
+app.use(authRoutes);
 
 const mongoUri = "mongodb+srv://manushadananjaya999:A3amGyjkv6AqI0Cs@cluster0.dpyghhm.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoUri);
@@ -20,7 +24,7 @@ app.get('/', (req, res) => {
     }
 );
 
-app.listen(3001, () => {
-    console.log('Listening on port 5000');
+app.listen(5001, () => {
+    console.log('Listening on port 3002');
     }
 );
