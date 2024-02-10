@@ -1,13 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const trackRoutes = require('./routes/trackRoutes');
+
 const requireAuth = require("./middleware/requireAuth")
+require('./models/NewUser');
+require('./models/Track');
 
 const app = express();
 
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(authRoutes);
+app.use(trackRoutes);
 
 const mongoUri = "mongodb+srv://manushadananjaya999:manusha123@cluster0.dpyghhm.mongodb.net/your_database_name?retryWrites=true&w=majority"; // Replace 'your_database_name' with your actual database name
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -22,7 +27,7 @@ app.get('/',requireAuth, (req, res) => {
     res.send(`your email : ${req.user.email}`);
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
