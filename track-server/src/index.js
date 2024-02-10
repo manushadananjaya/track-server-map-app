@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const requireAuth = require("./middleware/requireAuth")
 
 const app = express();
 
@@ -17,11 +18,11 @@ mongoose.connection.on('error', (err) => {
     console.error('Error connecting to MongoDB', err);
 });
 
-app.get('/', (req, res) => {
-    res.send("hi there");
+app.get('/',requireAuth, (req, res) => {
+    res.send(`your email : ${req.user.email}`);
 });
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
